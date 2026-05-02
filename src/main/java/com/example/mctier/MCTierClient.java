@@ -87,9 +87,10 @@ public class MCTierClient implements ClientModInitializer {
             MinecraftClient client = MinecraftClient.getInstance();
             if (rank != null && rank.equalsIgnoreCase(targetRank)) {
                 client.execute(() -> {
-                    if (client.player != null) {
+                    if (client.player != null && client.world != null) {
                         for (int i = 0; i < 10; i++) {
-                            client.player.playSound(SoundEvents.ENTITY_GENERIC_EXPLODE.value(), SoundCategory.MASTER, 1.0f, 1.0f);
+                            client.world.playSound(client.player, client.player.getX(), client.player.getY(), client.player.getZ(),
+                                SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 1.0f, 1.0f);
                         }
                     }
                     client.inGameHud.setOverlayMessage(Text.literal("§6§lGELDİ"), false);
